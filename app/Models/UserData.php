@@ -14,6 +14,10 @@ class UserData extends Model
         'activity',
         'gender',
         'goal',
+        'calories',
+        'protein',
+        'carbs',
+        'fat'
     ];
     public function user(){
         return

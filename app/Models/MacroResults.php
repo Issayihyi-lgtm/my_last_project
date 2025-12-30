@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MacroResult extends Model
+class MacroResults extends Model
 {
     protected $fillable = [
         'user_id',
@@ -12,13 +12,6 @@ class MacroResult extends Model
         'protein',
         'carbs',
         'fat',
-        'bmr',
-        'tdee',
-        'goal',
-        'result_date'
+        'result_date',
     ];
-    public function user(){
-        return
-        $this->belongsTo(User::class);
-    }
 }

@@ -49,13 +49,13 @@ class User extends Authenticatable
     public function data()
     {
         return
-        $this->hasOne(UserData::class);
+        $this->hasOne(UserData::class,'user_id');
     }
-    public function macroResults()
-    {
+    public function macroResult(){
         return
-        $this->hasMany(MacroResult::class);
+        $this->hasOne(MacroResults::class);
     }
+
     public function foods()
     {
         return
