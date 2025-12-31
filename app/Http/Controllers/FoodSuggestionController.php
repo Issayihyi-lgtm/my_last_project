@@ -16,7 +16,7 @@ class FoodSuggestionController extends Controller
             $query->where('type', $request->type);
         }
 
-        // البحث (تصحيح الكود)
+        // البحث
         if ($request->filled('search')) {
             $query->where('food_name', 'like', '%' . $request->search . '%');
         }
@@ -31,10 +31,4 @@ class FoodSuggestionController extends Controller
         return view('foods.index', compact('foods'));
     }
 
-    // public function show($id)
-    // {
-    //     $food = FoodSuggestion::findOrFail($id);
-    //     // إذا كنت تريد عرض صفحة تفاصيل لكل نوع أكل
-    //     return view('food_details', compact('food'));
-    // }
 }

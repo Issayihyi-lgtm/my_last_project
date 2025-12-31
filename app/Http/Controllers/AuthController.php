@@ -21,12 +21,12 @@ class AuthController extends Controller
         // تسجيل الدخول تلقائياً بعد التسجيل
         Auth::login($user);
 
-        // التوجيه لصفحة إدخال البيانات (لأنه مستخدم جديد حتماً)
+        // التوجيه لصفحة إدخال البيانات
         return redirect()->route('profile.user_data.create')->with('success', 'تم إنشاء حسابك بنجاح! فضلاً أدمل بياناتك لحساب سعراتك.');
     }
 
     /**
-     * تسجيل الدخول مع فحص وجود بيانات مسبقة
+     * تسجيل الدخول و فحص وجود بيانات مسبقة
      */
     public function login(LoginRequest $request)
     {
@@ -37,7 +37,7 @@ class AuthController extends Controller
 
         $user = Auth::user();
 
-        // منطق التوجيه الذكي
+        // منطق التوجيه 
         if ($user->data) {
             // إذا كان قد أدخل بياناته وطوله ووزنه مسبقاً
             return redirect()->route('dashboard');

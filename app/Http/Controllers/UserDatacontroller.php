@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\UserData;
-use App\Models\MacroResult; // تأكد من استدعاء الموديل الجديد هنا
+use App\Models\MacroResult;
 use App\Http\Requests\StoreUserDataRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,7 +20,7 @@ class UserDataController extends Controller
         $user = Auth::user();
         $data = $request->validated();
 
-        // --- الحسابات الرياضية (كما هي بدون تغيير) ---
+        // --- الحسابات الرياضية  ---
         if ($data['gender'] === 'male') {
             $bmr = (10 * $data['weight']) + (6.25 * $data['height']) - (5 * $data['age']) + 5;
         } else {
@@ -60,15 +60,14 @@ class UserDataController extends Controller
             ]
         );
 
-        // 2. حفظ النتائج في جدول macro_results (أو اسم الموديل الذي أنشأته)
-        // هذا الجزء سيمنع ظهور خطأ "Column not found" في جدول user_data
+        // 2. حفظ النتائج في جدول macro_results
         $user->macroResult()->updateOrCreate(
             ['user_id' => $user->id],
             [
                 'calories' => round($calories),
                 'protein'  => round($protein),
                 'fat'      => round($fats),
-                'carbs'    => round($carb), // تأكد إذا كان الاسم carb أو carbs في جدولك
+                'carbs'    => round($carb),
             ]
         );
 
@@ -87,7 +86,6 @@ class UserDataController extends Controller
             return redirect()->route('profile.user_data.create')->with('error', 'يرجى إدخال بياناتك أولاً');
         }
 
-        // نرسل النتائج والبيانات للبليد
         return view('calories.show', compact('userData', 'macroResults'));
     }
 }
